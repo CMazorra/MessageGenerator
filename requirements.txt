@@ -1,0 +1,6 @@
+ollama
+pyphen
+pandas
+jupyterlab
+tqdm
+pytest

@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "tema": "Python",
+    "palabra_obligatoria": "listas"
+  },
+  {
+    "id": 2,
+    "tema": "Machine Learning",
+    "palabra_obligatoria": "datos"
+  },
+  {
+    "id": 3,
+    "tema": "Bases de datos",
+    "palabra_obligatoria": "tablas"
+  },
+  {
+    "id": 4,
+    "tema": "Recursividad",
+    "palabra_obligatoria": "bucle"
+  },
+  {
+    "id": 5,
+    "tema": "Control de versiones",
+    "palabra_obligatoria": "commit"
+  }
+]
