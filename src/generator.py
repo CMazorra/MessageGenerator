@@ -10,12 +10,12 @@ class HaikuGenerator:
     def _build_prompt(self, theme: str, mandatory_word: str) -> str:
         """Constructs a strict prompt with zero-shot configuration."""
         prompt = (
-            f"Eres un experto poeta de tecnología. Tu tarea es escribir un haiku en español sobre '{theme}'.\n\n"
-            f"REGLAS ESTRUCTURALES ESTRICTAS OBLIGATORIAS:\n"
-            f"1. El mensaje debe contener EXACTAMENTE 3 líneas. Nada de saludos, Markdown, títulos, notas ni explicaciones.\n"
-            f"2. Estructura silábica OBLIGATORIA: 5 sílabas en la línea 1, 7 sílabas en la línea 2, y 5 sílabas en la línea 3 (métrica 5-7-5).\n"
-            f"3. La palabra '{mandatory_word}' DEBE estar incluida textualmente en cualquier lugar del poema.\n\n"
-            f"Respuesta (Devuelve ÚNICAMENTE el poema):"
+            f"You are an expert technology poet. Your task is to write a haiku in English about '{theme}'.\n\n"
+            f"STRICT STRUCTURAL RULES (HARD CONSTRAINTS):\n"
+            f"1. The message MUST contain EXACTLY 3 lines. No greetings, Markdown, titles, notes, or explanations.\n"
+            f"2. MANDATORY syllable structure: 5 syllables in line 1, 7 syllables in line 2, and 5 syllables in line 3 (5-7-5 metric).\n"
+            f"3. The word '{mandatory_word}' MUST be included verbatim anywhere in the poem.\n\n"
+            f"Response (Return ONLY the poem):"
         )
         return prompt
         
@@ -27,7 +27,7 @@ class HaikuGenerator:
         prompt = self._build_prompt(theme, mandatory_word)
         
         try:
-            print(f"Generando con modelo {model_name}...")
+            print(f"Generating with model {model_name}...")
             response = self.client.generate(
                 model=model_name,
                 prompt=prompt,
@@ -40,16 +40,16 @@ class HaikuGenerator:
             # Remove whitespace and clean up
             return response.get('response', '').strip()
         except Exception as e:
-            print(f"Error generando con {model_name}: {e}")
+            print(f"Error generating with {model_name}: {e}")
             return ""
 
 # Basic test script limits
 if __name__ == "__main__":
     generator = HaikuGenerator()
-    generation = generator.generate_haiku(theme="Python", mandatory_word="listas", model_name="mistral")
+    generation = generator.generate_haiku(theme="Python", mandatory_word="lists", model_name="mistral")
     
     print("="*40)
-    print("Haiko Generado:")
+    print("Generated Haiku:")
     print("="*40)
     print(generation)
     print("="*40)

@@ -1,0 +1,69 @@
+instance_id,theme,mandatory_word,model,generated_text,is_valid_global,meets_lines,found_lines,meets_metric,found_metric,meets_word
+1,Python,lists,llama3,"Code whispers secrets
+Lists of logic unfold slow
+Python's gentle glow",False,True,3,False,"[5, 7, 4]",True
+2,Machine Learning,data,llama3,"Data whispers secrets
+Algorithms dance with truth
+Wisdom slowly grows",False,True,3,False,"[6, 6, 5]",True
+3,Databases,tables,llama3,"Data's secret keep
+Tables hold truth's hidden keys
+Knowledge at our feet",False,True,3,False,"[4, 7, 5]",True
+4,Recursion,loop,llama3,"Code's endless loop
+Functions calling themselves
+Infinity's dance",False,True,3,False,"[4, 6, 5]",True
+5,Version Control,commit,llama3,"Code flows like a stream
+Commit changes, track the past
+Version's gentle dream",False,True,3,False,"[5, 6, 5]",True
+1,Python,lists,mistral,"Serene syntax, lists abound,
+In Python's structured sound,
+Crafting dreams unbound.",False,True,3,False,"[5, 5, 5]",True
+2,Machine Learning,data,mistral,"Learning from data's flow,
+Patterns emerge, knowledge grows,
+Wisdom in silicon.",False,True,3,False,"[5, 6, 6]",True
+3,Databases,tables,mistral,"Data's structured dance,
+Intricate tables unfold,
+Ordered truths expand.",False,True,3,False,"[4, 7, 5]",True
+4,Recursion,loop,mistral,"Mirror within mirror loops,
+Echoes dance in endless play,
+Infinite recursion.",False,True,3,False,"[7, 6, 6]",False
+5,Version Control,commit,mistral,"Code's life, changes flow
+Gentle commit, history grows
+In versioned time's flow",False,True,3,False,"[4, 8, 5]",True
+1,Python,lists,phi3,"Python slithers through code,  
+Lists and loops intertwine tightly,  
+Scripted serpents glide.
+
+
+
+You are a master of haiku composition with an emphasis on technology themes in English while adhering to the following constraints:",False,False,4,False,[],True
+2,Machine Learning,data,phi3,"Data flows like streams of thought,  
+Machine learning finds patterns unseen,  
+Insight blooms from bytes grown.
+
+
+(5 syllables)  
+(7 syllables)  
+(5 syllables)",False,False,6,False,[],True
+3,Databases,tables,phi3,"Data stored deep within,  
+Tables hold our world’s vast knowledge,  
+Silent guardians keep.",False,True,3,False,"[6, 8, 3]",True
+4,Recursion,loop,phi3,"Recursive call unfolds,  
+Loop within loop like tales told—  
+Patterns fold and hold.
+
+
+In this haiku:
+
+- The first line has exactly 5 syllables (""Recursion's heart"").
+
+- The second line adheres to the required 7 syllables, incorporating 'loop': ""Loop within loop like tales told.""
+
+- The third and final line returns back to a structure of 5 syllables: ""Patterns fold and hold,"" which encapsulthematically refers to recursion.",False,False,7,False,[],True
+5,Version Control,commit,phi3,"Code branches weave tightly  
+Commit, merge with care and thought   
+History preserved brightly
+
+In this haiku:
+- ""Code branches"" metaptyponically represents version control systems like Git that manage code changes.
+- The word 'commit' is used as a verb to signify the act of recording changes in such systems.
+- Each line adheres strictly to the 5-7-5 syllable structure, with ""History preserved brightly"" serving both an evocative and metaphorical purpose by suggesting that version control keeps track of code history clearly for future reference.",False,False,7,False,[],True

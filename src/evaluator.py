@@ -3,8 +3,8 @@ import pyphen
 
 class HaikuEvaluator:
     def __init__(self):
-        # Initialize pyphen for Spanish language
-        self.dic = pyphen.Pyphen(lang='es')
+        # Initialize pyphen for English language
+        self.dic = pyphen.Pyphen(lang='en_US')
     
     def _count_syllables_word(self, word: str) -> int:
         """Counts the syllables of a word using pyphen."""
@@ -58,8 +58,8 @@ class HaikuEvaluator:
 
 if __name__ == "__main__":
     evaluator = HaikuEvaluator()
-    poem = "El código es" + "\n" + "listas en la memoria" + "\n" + "un bucle sin fin"
-    result = evaluator.evaluate(poem, "listas")
+    poem = "Code is very fast" + "\n" + "lists stored in the memory" + "\n" + "a loop without end"
+    result = evaluator.evaluate(poem, "lists")
     
     import json
     print(json.dumps(result, indent=2))
