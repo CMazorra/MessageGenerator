@@ -36,7 +36,7 @@ def run_experiment():
             constraints = item['constraints']
             
             # Step A: Generation
-            generated_text = generator.generate(intent, constraints, model)
+            generated_text, metrics = generator.generate(intent, constraints, model)
             
             # Step B: Evaluation
             eval_result = evaluator.evaluate(generated_text, constraints, judge_model=judge_model)
@@ -47,6 +47,9 @@ def run_experiment():
                 "generator_model": model,
                 "intent": intent,
                 "generated_text": generated_text,
+                "latency_initial_sec": metrics["initial_time"],
+                "latency_retry_sec": metrics["retry_time"],
+                "retries_used": metrics["retries_used"],
                 "global_score": eval_result['global_score']
             }
             # Flatten the detailed constraint evaluation into the CSV
@@ -64,6 +67,34 @@ def run_experiment():
     print("\nGlobal Success Score Average (0.0 to 1.0) per model:")
     summary = df.groupby('generator_model')['global_score'].mean()
     print(summary)
+    
+    print("\n=== Latency and Retries per Model ===")
+    latency_summary = df.groupby('generator_model')[['latency_initial_sec', 'latency_retry_sec', 'retries_used']].mean().round(3)
+    print(latency_summary.to_string())
+
+    print("\n=== Detailed Sub-Metrics per Model (%) ===")
+    # 1. Strict Accuracy (Score == 1.0)
+    df['strict_accuracy'] = (df['global_score'] == 1.0).astype(float)
+    
+    # Helper to compute row-wise means safely ignoring NaNs (blank values in CSV)
+    def col_mean(cols):
+        valid_cols = [c for c in cols if c in df.columns]
+        return df[valid_cols].mean(axis=1) if valid_cols else float('nan')
+        
+    # 2. Lexical Compliance
+    df['lexical_compliance'] = col_mean(['C_mandatory_words', 'C_forbidden_words'])
+    # 3. Formatting Compliance
+    df['formatting_compliance'] = col_mean(['C_exact_lines', 'C_format_json', 'C_required_json_keys'])
+    # 4. Length Adherence
+    df['length_adherence'] = col_mean(['C_min_words', 'C_max_words'])
+    # 5. Semantic Success (Tone)
+    df['semantic_success'] = col_mean(['C_tone'])
+    
+    # Group results by model, calculate the mean for each subset, round, and turn into percentage
+    metrics = ['strict_accuracy', 'lexical_compliance', 'formatting_compliance', 'length_adherence', 'semantic_success']
+    detailed_summary = df.groupby('generator_model')[metrics].mean().round(3) * 100
+    
+    print(detailed_summary.to_string())
 
 if __name__ == "__main__":
     run_experiment()
