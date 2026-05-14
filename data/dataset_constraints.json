@@ -1,0 +1,49 @@
+[
+  {
+    "id": 1,
+    "intent": "Write an apology email to a customer for a delayed package.",
+    "constraints": {
+      "max_words": 40,
+      "mandatory_words": ["sorry", "shipping", "refund"],
+      "forbidden_words": ["mistake", "fault"],
+      "tone": "empathetic"
+    }
+  },
+  {
+    "id": 2,
+    "intent": "Explain what a database is to a 10 year old.",
+    "constraints": {
+      "min_words": 30,
+      "max_words": 60,
+      "forbidden_words": ["sql", "server", "data", "query"],
+      "tone": "educational"
+    }
+  },
+  {
+    "id": 3,
+    "intent": "Create a short product description for a wireless mouse.",
+    "constraints": {
+      "format": "json",
+      "required_json_keys": ["product_name", "price", "description"],
+      "mandatory_words": ["ergonomic", "battery"]
+    }
+  },
+  {
+    "id": 4,
+    "intent": "Write a short poem about debugging.",
+    "constraints": {
+      "exact_lines": 4,
+      "forbidden_words": ["bug", "error", "code"],
+      "tone": "dramatic"
+    }
+  },
+  {
+    "id": 5,
+    "intent": "List ideas for a new tech startup.",
+    "constraints": {
+      "exact_lines": 3,
+      "mandatory_words": ["AI", "cloud"],
+      "forbidden_words": ["blockchain", "crypto"]
+    }
+  }
+]

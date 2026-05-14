@@ -4,71 +4,65 @@ import json
 import pandas as pd
 from tqdm import tqdm
 
-# Ensure Python can find local modules
 sys.path.append(os.path.dirname(__file__))
 
-from generator import HaikuGenerator
-from evaluator import HaikuEvaluator
+from generator import DynamicGenerator
+from evaluator import DynamicEvaluator
 
 def run_experiment():
-    # Setup relative paths
     base_dir = os.path.dirname(os.path.dirname(__file__))
-    data_path = os.path.join(base_dir, 'data', 'dataset_haikus.json')
-    results_path = os.path.join(base_dir, 'data', 'experiment_results.csv')
+    data_path = os.path.join(base_dir, 'data', 'dataset_constraints.json')
+    results_path = os.path.join(base_dir, 'data', 'dynamic_experiment_results.csv')
 
-    # Load Dataset
     with open(data_path, 'r', encoding='utf-8') as f:
         dataset = json.load(f)
 
-    generator = HaikuGenerator()
-    evaluator = HaikuEvaluator()
+    generator = DynamicGenerator()
+    evaluator = DynamicEvaluator()
     
-    # Local models downloaded via Docker
     models_to_test = ["llama3", "mistral", "phi3"]
+    # Model to act as impartial judge for the 'tone' constraint
+    judge_model = "llama3" 
+    
     results = []
 
-    print(f"Starting experiment with {len(dataset)} instances and {len(models_to_test)} models...")
+    print(f"Starting dynamic CSP experiment with {len(dataset)} instances and {len(models_to_test)} models...")
 
     for model in models_to_test:
-        print(f"\n--- Evaluating model: {model} ---")
-        # Using tqdm for a console progress bar
+        print(f"\n--- Evaluating Generator Model: {model} ---")
         for item in tqdm(dataset, desc=f"Generating with {model}"):
             item_id = item['id']
-            theme = item['theme']
-            word = item['mandatory_word']
+            intent = item['intent']
+            constraints = item['constraints']
             
             # Step A: Generation
-            generated_text = generator.generate_haiku(theme, word, model)
+            generated_text = generator.generate(intent, constraints, model)
             
             # Step B: Evaluation
-            eval_result = evaluator.evaluate(generated_text, word)
+            eval_result = evaluator.evaluate(generated_text, constraints, judge_model=judge_model)
             
-            # Step C: Combined result collection
+            # Step C: Collect metrics
             record = {
                 "instance_id": item_id,
-                "theme": theme,
-                "mandatory_word": word,
-                "model": model,
+                "generator_model": model,
+                "intent": intent,
                 "generated_text": generated_text,
-                "is_valid_global": eval_result['is_valid'],
-                "meets_lines": eval_result['meets_lines'],
-                "found_lines": eval_result['found_lines'],
-                "meets_metric": eval_result['meets_metric'],
-                "found_metric": str(eval_result['found_metric']), # Saved as string for CSV
-                "meets_word": eval_result['meets_word']
+                "global_score": eval_result['global_score']
             }
+            # Flatten the detailed constraint evaluation into the CSV
+            for k, v in eval_result['details'].items():
+                record[f"C_{k}"] = v
+                
             results.append(record)
 
-    # Export results with Pandas for easy analysis
     df = pd.DataFrame(results)
     df.to_csv(results_path, index=False, encoding='utf-8')
     
     print("\nExperiment finished!")
-    print(f"Detailed results have been saved to: {results_path}")
+    print(f"Results saved to: {results_path}")
     
-    # Calculate and print a quick summary
-    print("\nSuccess Rate (%) per model (Constraint Satisfaction Rate):")
-    summary = df.groupby('model')['is_valid_global'].mean() * 100
+    print("\nGlobal Success Score Average (0.0 to 1.0) per model:")
+    summary = df.groupby('generator_model')['global_score'].mean()
     print(summary)
 
 if __name__ == "__main__":

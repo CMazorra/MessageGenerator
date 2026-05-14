@@ -1,65 +1,138 @@
 import re
-import pyphen
+import json
+import os
+import ollama
 
-class HaikuEvaluator:
+class DynamicEvaluator:
     def __init__(self):
-        # Initialize pyphen for English language
-        self.dic = pyphen.Pyphen(lang='en_US')
-    
-    def _count_syllables_word(self, word: str) -> int:
-        """Counts the syllables of a word using pyphen."""
-        clean_word = re.sub(r'[^\w\s]', '', word).lower()
-        if not clean_word:
-            return 0
-            
-        syllables = self.dic.inserted(clean_word).split('-')
-        return len(syllables)
+        # We initialize the client to allow LLM-as-a-judge capabilities for Soft Constraints
+        host = os.environ.get('OLLAMA_HOST', 'http://localhost:11434')
+        self.client = ollama.Client(host=host)
 
-    def _count_syllables_line(self, line: str) -> int:
-        """Counts total syllables in a line by summing its words."""
-        words = line.split()
-        total_syllables = sum(self._count_syllables_word(w) for w in words)
-        return total_syllables
+    def _get_word_count(self, text: str) -> int:
+        """Helper to count actual words, ignoring punctuation."""
+        return len(re.findall(r'\b\w+\b', text))
 
-    def evaluate(self, generated_text: str, mandatory_word: str) -> dict:
+    def _evaluate_tone_with_llm(self, text: str, expected_tone: str, judge_model: str) -> bool:
         """
-        Evaluates if the text meets the formal rules of our Haiku.
-        Returns a dictionary with the evaluation details.
+        Soft Constraint: Uses an LLM to evaluate if the text meets the expected tone.
         """
-        lines = [line.strip() for line in generated_text.strip().split('\n') if line.strip()]
+        prompt = (
+            f"You are an expert impartial judge evaluating the tone of a text.\n\n"
+            f"TEXT TO EVALUATE:\n\"\"\"{text}\"\"\"\n\n"
+            f"QUESTION: Does the text successfully convey a strictly '{expected_tone}' tone?\n"
+            f"Respond ONLY with YES or NO."
+        )
+        try:
+            # We use temperature 0.0 for maximum consistency in the judge
+            response = self.client.generate(model=judge_model, prompt=prompt, options={"temperature": 0.0})
+            answer = response.get('response', '').strip().upper()
+            print(f"LLM Judge Response for tone evaluation: '{answer}'")
+            # Simple check: Does the LLM judge's text start with YES or contain YES prominently?
+            if answer.startswith('YES') or 'YES,' in answer or answer == 'YES.':
+                return True
+            return False
+        except Exception as e:
+            print(f"Error in LLM Judge [{judge_model}]: {e}")
+            return False
+
+    def evaluate(self, generated_text: str, constraints: dict, judge_model: str = "llama3") -> dict:
+        """
+        Dynamically applies all constraints found in the dictionary to the given text.
+        Returns a detailed map of passed constraints and a Global Success Score between 0.0 and 1.0.
+        """
+        results = {}
+        passed_count = 0
+        total_count = len(constraints)
         
-        # 1. C1: Line structure constraint (Exactly 3 lines)
-        meets_lines = len(lines) == 3
+        if total_count == 0:
+            return {"global_score": 1.0, "details": {}}
+
+        # --- HARD CONSTRAINTS ---
+
+        if 'min_words' in constraints:
+            passed = self._get_word_count(generated_text) >= constraints['min_words']
+            results['min_words'] = passed
+            passed_count += int(passed)
+
+        if 'max_words' in constraints:
+            passed = self._get_word_count(generated_text) <= constraints['max_words']
+            results['max_words'] = passed
+            passed_count += int(passed)
+
+        if 'exact_lines' in constraints:
+            lines = [line for line in generated_text.strip().split('\n') if line.strip()]
+            passed = len(lines) == constraints['exact_lines']
+            results['exact_lines'] = passed
+            passed_count += int(passed)
+
+        if 'mandatory_words' in constraints:
+            req_words = constraints['mandatory_words']
+            passed = all(re.search(rf'\b{re.escape(w)}\b', generated_text, re.IGNORECASE) for w in req_words)
+            results['mandatory_words'] = passed
+            passed_count += int(passed)
+
+        if 'forbidden_words' in constraints:
+            forb_words = constraints['forbidden_words']
+            passed = not any(re.search(rf'\b{re.escape(w)}\b', generated_text, re.IGNORECASE) for w in forb_words)
+            results['forbidden_words'] = passed
+            passed_count += int(passed)
+
+        # JSON Formatting evaluation
+        parsed_json = None
+        if 'format' in constraints and constraints['format'] == 'json':
+            clean_text = generated_text.strip()
+            # Clean possible markdown blocks typically produced by LLMs
+            if '```json' in clean_text:
+                match = re.search(r'```json\s*(.*?)\s*```', clean_text, re.DOTALL)
+                if match: clean_text = match.group(1)
+            elif '```' in clean_text:
+                match = re.search(r'```\s*(.*?)\s*```', clean_text, re.DOTALL)
+                if match: clean_text = match.group(1)
+
+            try:
+                parsed_json = json.loads(clean_text)
+                passed = True
+            except json.JSONDecodeError:
+                passed = False
+                
+            results['format_json'] = passed
+            passed_count += int(passed)
+
+        if 'required_json_keys' in constraints:
+            if parsed_json and isinstance(parsed_json, dict):
+                passed = all(k in parsed_json for k in constraints['required_json_keys'])
+            else:
+                passed = False
+            results['required_json_keys'] = passed
+            passed_count += int(passed)
+
+        # --- SOFT CONSTRAINTS ---
         
-        # 2. C2: Metric 5-7-5 (Hard constraint)
-        syllable_counts = []
-        meets_metric = False
-        
-        if meets_lines:
-            syllable_counts = [self._count_syllables_line(line) for line in lines]
-            meets_metric = (syllable_counts == [5, 7, 5])
-            
-        # 3. C3: Content constraint (Mandatory word)
-        word_regex = re.compile(rf'\b{re.escape(mandatory_word.lower())}\b')
-        meets_word = bool(word_regex.search(generated_text.lower()))
-        
-        # Overall evaluation
-        is_valid = meets_lines and meets_metric and meets_word
-        
+        if 'tone' in constraints:
+            passed = self._evaluate_tone_with_llm(generated_text, constraints['tone'], judge_model)
+            results['tone'] = passed
+            passed_count += int(passed)
+
+        # Calculate partial success representation
+        score = passed_count / total_count
+
         return {
-            "is_valid": is_valid,
-            "meets_lines": meets_lines,
-            "found_lines": len(lines),
-            "meets_metric": meets_metric,
-            "found_metric": syllable_counts,
-            "meets_word": meets_word,
-            "target_word": mandatory_word
+            "global_score": score,
+            "details": results
         }
 
 if __name__ == "__main__":
-    evaluator = HaikuEvaluator()
-    poem = "Code is very fast" + "\n" + "lists stored in the memory" + "\n" + "a loop without end"
-    result = evaluator.evaluate(poem, "lists")
-    
-    import json
-    print(json.dumps(result, indent=2))
+    # Quick Test
+    evaluator = DynamicEvaluator()
+    sample_text = "I am very sorry for the shipping delay. We will process your refund."
+    sample_constraints = {
+        "max_words": 40,
+        "mandatory_words": ["sorry", "shipping", "refund"],
+        "forbidden_words": ["mistake", "fault"],
+        "tone": "empathetic"
+    }
+    # This might take a second as it spins up a local model for the soft constraint
+    print("Testing Evaluator...")
+    res = evaluator.evaluate(sample_text, sample_constraints, judge_model="llama3")
+    print(json.dumps(res, indent=2))
