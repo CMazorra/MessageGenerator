@@ -1,77 +1,31 @@
-instance_id,generator_model,intent,generated_text,latency_initial_sec,latency_retry_sec,retries_used,global_score,C_max_words,C_mandatory_words,C_forbidden_words,C_tone,C_min_words,C_format_json,C_required_json_keys,C_exact_lines
-1,llama3,Write an apology email to a customer for a delayed package.,"""Dear [Customer],
-
-I'm sorry to inform you that your package has been delayed in shipping. We're working hard to get it to you as soon as possible. A full refund will be processed once the issue is resolved.
-
-Sincerely,
-[Your Name]""",-10.8861825466156,20.48577356338501,1,0.5,False,True,True,False,,,,
-2,llama3,Explain what a database is to a 10 year old.,"A database is like a super-organized library where we store lots of information, like books, pictures, and even videos! It's a special kind of filing system that helps us find things quickly and easily. Just like how you keep your toys in order on your shelf, a database keeps all the information tidy and easy to access.",24.169404983520508,0.0001423358917236328,0,1.0,True,,True,True,True,,,
-3,llama3,Create a short product description for a wireless mouse.,"{
-""product_name"": ""Ergonomic Wireless Mouse"",
-""price"": 49.99,
-""description"": ""Experience precise control and comfort with our ergonomic wireless mouse, featuring advanced battery life that lasts up to 12 months on a single charge.""
-}",19.509992599487305,0.00015163421630859375,0,1.0,,True,,,,True,True,
-4,llama3,Write a short poem about debugging.,"In twilight's hush, where shadows play
-The hunt begins, for errors' sway
-A whispered quest, to set things right
-And bring the darkness of despair to light",13.825863599777222,0.0001342296600341797,0,1.0,,,True,True,,,,True
-5,llama3,List ideas for a new tech startup.,"Revolutionizing AI-Powered Cloud Services
-Our innovative startup concept leverages cloud computing and artificial intelligence to streamline data processing, enabling businesses to make more informed decisions faster. By harnessing the power of cloud-based infrastructure and AI-driven analytics, we can help organizations optimize their operations, reduce costs, and improve customer experiences.
-With a focus on scalability, security, and ease-of-use, our cloud-based platform will cater to various industries, including finance, healthcare, and e-commerce.",35.4972198009491,31.380160331726074,1,1.0,,True,True,,,,,True
-1,mistral,Write an apology email to a customer for a delayed package.,"""Dear valued customer,
-
-We sincerely apologize for the delay in your shipping delivery. We understand this inconvenience and appreciate your patience during this time. Rest assured, we are working tirelessly to expedite your package and will process a refund for any additional costs incurred due to the delay.
-
-Thank you for choosing us, and we apologize again for any inconvenience caused.
-
-Best regards,
-[Your Name]
-[Company Name] Customer Service Team""
-
-(60 words)",36.418423891067505,28.124258279800415,1,0.25,False,False,True,False,,,,
-2,mistral,Explain what a database is to a 10 year old.,"A digital filing system, much like your organized room, stores information neatly. Imagine all school reports, pictures, and notes in one place. This is what a database does for computers - it keeps data tidy so they can quickly locate what they need! (59 words)",73.96032762527466,-24.24418544769287,1,0.5,True,,False,False,True,,,
-3,mistral,Create a short product description for a wireless mouse.,"{
-  ""product_name"": ""Ergonomic Wireless Mouse"",
-  ""price"": ""$29.99"",
-  ""description"": ""Experience comfort and convenience with our Ergonomic Wireless Mouse. Equipped with a long-lasting battery, it ensures uninterrupted usage. Perfect for both work and play.""
-}",27.83215308189392,4.57763671875e-05,0,1.0,,True,,,,True,True,
-4,mistral,Write a short poem about debugging.,"In the realm where silicon pulses throb,
-A tale of woe and endless job,
-A quest for answers in the circuits,
-Where shadows dance, and secrets lurk.
-
-In this maze of switches and commands,
-The seeker journeys through the bands,
-With every step, a new despair,
-Yet hope remains, like a rare star.
-
-Through twilight hours and sunlit days,
-The hunter chases elusive ways,
-To mend the fractured, broken whole,
-And bring the system back to role.
-
-In this dance of light and dark,
-A hero's journey, bold and stark,
-Debugging's art, a silent song,
-A symphony of logic strong.",33.032301902770996,41.31679439544678,1,0.6666666666666666,,,True,True,,,,False
-5,mistral,List ideas for a new tech startup.,"AI-driven cloud solutions for optimizing business operations, revolutionizing data management, and enhancing customer experiences.
-Cloud-based platform for developing and deploying cutting-edge machine learning models at scale.
-Innovative cloud services for seamless integration of AI technologies into various industries.",25.084245681762695,3.838539123535156e-05,0,1.0,,True,True,,,,,True
-1,phi3,Write an apology email to a customer for a delayed package.,"Dear valued customer, we sincerely apologize for any inconvenience caused by our shipping delay; your understanding is greatly appreciated as you navigate through these unforeseen circumstances. Warm regards, [Your Company Name]",18.094594717025757,9.944325923919678,1,0.75,True,False,True,True,,,,
-2,phi3,Explain what a database is to a 10 year old.,"""Picture a room filled with various boxes, each cradling your favorite action figures – superheroes leaping into battle or dinosaurs roaring in prehistoric times! This place is like an organized database where every toy has its special drawer for easy access and retrieval. Instead of rummaging through darkness (which would be chaotic), you can simply request a specific type, and it'll appear right away because everything finds its designated spot.""",21.047590494155884,14.777724027633667,1,0.5,False,,True,False,True,,,
-3,phi3,Create a short product description for a wireless mouse.,"```json
-{
-  ""product_name"": ""ErgoBatt Wireless Mouse"",
-  ""price"": ""$29.99"",
-  ""description"": ""Experience ultimate comfort with our ergonomic ErgoBatt wireless mouse, featuring a long-lasting rechargeable battery for uninterrupted productivity.""
-}
-```",17.457603931427002,0.0017442703247070312,0,1.0,,True,,,,True,True,
-4,phi3,Write a short poem about debugging.,"In shadows of syntax, where bugs dare not tread,  
-A silent war unfolds in code once dreadfully spread;   
-With each keystroke' endless fight for clarity,    
-We conquer chaos to set our digital sea free.
-
-FINAL OUTPUT:",10.740101337432861,10.65394401550293,1,0.3333333333333333,,,False,True,,,,False
-5,phi3,List ideas for a new tech startup.,"""AI-driven cloud analytics platform for businesses, emphasizing real-time data processing and actionable insights without dependence on blockchain technology.""
-
-This revised text now has exactly three non-empty lines while avoiding any mention of blockchain as per the constraints. The tone remains professional and focused on enhancing decision making in business environments through AI analytics within a cloud infrastructure, prioritizing real-thy data processing for immediate insights without compromising security or transactional integrity by using alternative methods outside of blockchain technology.",58.41251277923584,-28.252315759658813,1,0.3333333333333333,,True,False,,,,,False
+instance_id,generator_model,generation_strategy,intent,generated_text,latency_initial_sec,latency_retry_sec,retries_used,global_score,M_algorithm,M_branching_factor,M_beam_width,M_search_depth,M_nodes_expanded,M_candidates_evaluated,M_candidates_pruned,M_semantic_guidance,M_semantic_weight,M_pruning_threshold,M_best_hard_score,M_final_global_score,C_max_words,C_mandatory_words,C_forbidden_words,C_tone,C_min_words,C_format_json,C_required_json_keys,C_exact_lines
+1,llama3,search,Write an apology email to a customer for a delayed package.,"Unfortunately, our shipping carrier experienced unforeseen delays If needed, we can explore options for a refund or reshipment of your order. We are truly sorry for the inconvenience this has caused and want to make it right.",189.21170091629028,0.0,0,1.0,heuristic_graph_search,4,1,3,3,12,1,True,0.15,0.25,1.0,1.0,True,True,True,True,,,,
+2,llama3,search,Explain what a database is to a 10 year old.,It's like a magic bookshelf where we can store and find all sorts of facts and answers It helps us keep all this information organized so we can find what we need quickly and easily,43.59655165672302,0.0,0,1.0,heuristic_graph_search,4,1,2,2,8,0,True,0.15,0.25,1.0,1.0,True,,True,True,True,,,
+3,llama3,search,Create a short product description for a wireless mouse.,,28.013720273971558,0.0,0,0.0,heuristic_graph_search,4,1,0,1,4,4,True,0.15,0.25,0.0,,,False,,,,False,False,
+4,llama3,search,Write a short poem about debugging.,"With the mysteries that lurk in every way
+In darkness, truth begins to seep
+In the silence, solutions slowly unfurl
+In the depths of night, insight takes hold",48.58128356933594,0.0,0,1.0,heuristic_graph_search,4,1,4,4,16,0,True,0.15,0.25,1.0,1.0,,,True,True,,,,True
+5,llama3,search,List ideas for a new tech startup.,"Develop an AI-powered chatbot for customer service using cloud-based infrastructure."",
+Integrate the chatbot with existing CRM systems to streamline data analysis.
+Utilize natural language processing to enable personalized customer interactions.",-25.014442920684814,0.0,0,1.0,heuristic_graph_search,4,1,3,3,12,0,True,0.15,0.25,1.0,,,True,True,,,,,True
+1,mistral,search,Write an apology email to a customer for a delayed package.,We understand your disappointment and apologize for any inconvenience caused by the delay in shipping. We appreciate your patience and understanding during this time.,76.6810188293457,0.0,0,0.75,heuristic_graph_search,4,1,2,3,12,4,True,0.15,0.25,0.6666666666666666,0.75,True,False,True,True,,,,
+2,mistral,search,Explain what a database is to a 10 year old.,"Think about your school library – it has books on all kinds of subjects. In the same way, a database stores many different pieces of information that we can access whenever we need them.",42.32345128059387,0.0,0,1.0,heuristic_graph_search,4,1,1,1,4,0,True,0.15,0.25,1.0,1.0,True,,True,True,True,,,
+3,mistral,search,Create a short product description for a wireless mouse.,"{ ""product_name"": ""Ergonomic Wireless Mouse MX Master 3"", ""price"": ""99.95"", ""description"": ""Experience ultimate precision and comfort with our Ergonomic Wireless Mouse MX Master 3. Equipped with a high-performance sensor, long battery life, and advanced features like multiple connectivity options and customizable buttons."" }",59.19043207168579,0.0,0,1.0,heuristic_graph_search,4,1,1,1,4,0,True,0.15,0.25,1.0,,,True,,,,True,True,
+4,mistral,search,Write a short poem about debugging.,"A quest to solve the unsolvable tales
+Where silence reigns and solutions hide
+In twists and turns, the mystery unfolds
+The seeker treads with cautious steps,",57.587559938430786,0.0,0,1.0,heuristic_graph_search,4,1,4,4,16,1,True,0.15,0.25,1.0,1.0,,,True,True,,,,True
+5,mistral,search,List ideas for a new tech startup.,"Explore AI-powered predictive analytics solutions for businesses in the cloud.
+Specialize in providing personalized recommendations based on customer data.
+Develop an AI model capable of automating routine tasks for increased productivity.",48.398693323135376,0.0,0,1.0,heuristic_graph_search,4,1,3,3,12,0,True,0.15,0.25,1.0,,,True,True,,,,,True
+1,phi3,search,Write an apology email to a customer for a delayed package.,"We sincerely apologize for any inconvenience caused by our shipping delay."", We understand how important timely deliveries are to our customers."", Sorry for this unforeseen delay and we appreciate your patience."", [",55.96206998825073,0.0,0,0.5,heuristic_graph_search,4,1,4,4,16,3,True,0.15,0.25,0.6666666666666666,0.5,True,False,True,False,,,,
+2,phi3,search,Explain what a database is to a 10 year old.,"Imagine it's similar to the library catalog that helps find books quickly and easily."", It organizes facts and figures so we can find what we need quickly just like books in sections on the shelves."",",39.0080840587616,0.0,0,0.75,heuristic_graph_search,4,1,2,2,8,0,True,0.15,0.25,1.0,0.75,True,,True,False,True,,,
+3,phi3,search,Create a short product description for a wireless mouse.,,28.782954692840576,0.0,0,0.0,heuristic_graph_search,4,1,0,1,4,4,True,0.15,0.25,0.0,,,False,,,,False,False,
+4,phi3,search,Write a short poem about debugging.,"Seek not with hands but heart and mind to quell.
+Through trials and tribulations we must proceed"",
+The truth within chaos to unbind."",
+Each step forward reveals more.",39.82834601402283,0.0,0,0.6666666666666666,heuristic_graph_search,4,1,4,4,16,0,True,0.15,0.25,1.0,0.6666666666666666,,,True,False,,,,True
+5,phi3,search,List ideas for a new tech startup.,"Our startup will focus on AI-driven cloud services to optimize online business operations."",
+We plan to integrate machine learning algorithms for predictive analysis and decision-making.
+The platform will cater specifically to small and medium enterprises by providing affordable AI-driven tools.",32.060683727264404,0.0,0,1.0,heuristic_graph_search,4,1,3,3,11,0,True,0.15,0.25,1.0,,,True,True,,,,,True

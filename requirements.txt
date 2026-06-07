@@ -4,3 +4,4 @@ pandas
 jupyterlab
 tqdm
 pytest
+sentence-transformers

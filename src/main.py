@@ -9,6 +9,8 @@ sys.path.append(os.path.dirname(__file__))
 from generator import DynamicGenerator
 from evaluator import DynamicEvaluator
 
+GENERATION_STRATEGY = "search"
+
 def run_experiment():
     base_dir = os.path.dirname(os.path.dirname(__file__))
     data_path = os.path.join(base_dir, 'data', 'dataset_constraints.json')
@@ -19,7 +21,7 @@ def run_experiment():
 
     generator = DynamicGenerator()
     evaluator = DynamicEvaluator()
-    
+
     models_to_test = ["llama3", "mistral", "phi3"]
     # Model to act as impartial judge for the 'tone' constraint
     judge_model = "llama3" 
@@ -36,7 +38,15 @@ def run_experiment():
             constraints = item['constraints']
             
             # Step A: Generation
-            generated_text, metrics = generator.generate(intent, constraints, model)
+            if GENERATION_STRATEGY == 'search':
+                generated_text, metrics = generator.generate_with_search(
+                    intent,
+                    constraints,
+                    model,
+                    judge_model=judge_model
+                )
+            else:
+                generated_text, metrics = generator.generate(intent, constraints, model)
             
             # Step B: Evaluation
             eval_result = evaluator.evaluate(generated_text, constraints, judge_model=judge_model)
@@ -45,6 +55,7 @@ def run_experiment():
             record = {
                 "instance_id": item_id,
                 "generator_model": model,
+                "generation_strategy": GENERATION_STRATEGY,
                 "intent": intent,
                 "generated_text": generated_text,
                 "latency_initial_sec": metrics["initial_time"],
@@ -52,6 +63,9 @@ def run_experiment():
                 "retries_used": metrics["retries_used"],
                 "global_score": eval_result['global_score']
             }
+            for k, v in metrics.items():
+                if k not in {"initial_time", "retry_time", "retries_used", "final_details"}:
+                    record[f"M_{k}"] = v
             # Flatten the detailed constraint evaluation into the CSV
             for k, v in eval_result['details'].items():
                 record[f"C_{k}"] = v
