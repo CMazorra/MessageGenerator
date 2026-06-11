@@ -1,31 +1,31 @@
-instance_id,generator_model,generation_strategy,intent,generated_text,latency_initial_sec,latency_retry_sec,retries_used,global_score,M_algorithm,M_branching_factor,M_beam_width,M_search_depth,M_nodes_expanded,M_candidates_evaluated,M_candidates_pruned,M_semantic_guidance,M_semantic_weight,M_pruning_threshold,M_best_hard_score,M_final_global_score,C_max_words,C_mandatory_words,C_forbidden_words,C_tone,C_min_words,C_format_json,C_required_json_keys,C_exact_lines
-1,llama3,search,Write an apology email to a customer for a delayed package.,"Unfortunately, our shipping carrier experienced unforeseen delays If needed, we can explore options for a refund or reshipment of your order. We are truly sorry for the inconvenience this has caused and want to make it right.",189.21170091629028,0.0,0,1.0,heuristic_graph_search,4,1,3,3,12,1,True,0.15,0.25,1.0,1.0,True,True,True,True,,,,
-2,llama3,search,Explain what a database is to a 10 year old.,It's like a magic bookshelf where we can store and find all sorts of facts and answers It helps us keep all this information organized so we can find what we need quickly and easily,43.59655165672302,0.0,0,1.0,heuristic_graph_search,4,1,2,2,8,0,True,0.15,0.25,1.0,1.0,True,,True,True,True,,,
-3,llama3,search,Create a short product description for a wireless mouse.,,28.013720273971558,0.0,0,0.0,heuristic_graph_search,4,1,0,1,4,4,True,0.15,0.25,0.0,,,False,,,,False,False,
-4,llama3,search,Write a short poem about debugging.,"With the mysteries that lurk in every way
-In darkness, truth begins to seep
-In the silence, solutions slowly unfurl
-In the depths of night, insight takes hold",48.58128356933594,0.0,0,1.0,heuristic_graph_search,4,1,4,4,16,0,True,0.15,0.25,1.0,1.0,,,True,True,,,,True
-5,llama3,search,List ideas for a new tech startup.,"Develop an AI-powered chatbot for customer service using cloud-based infrastructure."",
-Integrate the chatbot with existing CRM systems to streamline data analysis.
-Utilize natural language processing to enable personalized customer interactions.",-25.014442920684814,0.0,0,1.0,heuristic_graph_search,4,1,3,3,12,0,True,0.15,0.25,1.0,,,True,True,,,,,True
-1,mistral,search,Write an apology email to a customer for a delayed package.,We understand your disappointment and apologize for any inconvenience caused by the delay in shipping. We appreciate your patience and understanding during this time.,76.6810188293457,0.0,0,0.75,heuristic_graph_search,4,1,2,3,12,4,True,0.15,0.25,0.6666666666666666,0.75,True,False,True,True,,,,
-2,mistral,search,Explain what a database is to a 10 year old.,"Think about your school library – it has books on all kinds of subjects. In the same way, a database stores many different pieces of information that we can access whenever we need them.",42.32345128059387,0.0,0,1.0,heuristic_graph_search,4,1,1,1,4,0,True,0.15,0.25,1.0,1.0,True,,True,True,True,,,
-3,mistral,search,Create a short product description for a wireless mouse.,"{ ""product_name"": ""Ergonomic Wireless Mouse MX Master 3"", ""price"": ""99.95"", ""description"": ""Experience ultimate precision and comfort with our Ergonomic Wireless Mouse MX Master 3. Equipped with a high-performance sensor, long battery life, and advanced features like multiple connectivity options and customizable buttons."" }",59.19043207168579,0.0,0,1.0,heuristic_graph_search,4,1,1,1,4,0,True,0.15,0.25,1.0,,,True,,,,True,True,
-4,mistral,search,Write a short poem about debugging.,"A quest to solve the unsolvable tales
-Where silence reigns and solutions hide
-In twists and turns, the mystery unfolds
-The seeker treads with cautious steps,",57.587559938430786,0.0,0,1.0,heuristic_graph_search,4,1,4,4,16,1,True,0.15,0.25,1.0,1.0,,,True,True,,,,True
-5,mistral,search,List ideas for a new tech startup.,"Explore AI-powered predictive analytics solutions for businesses in the cloud.
-Specialize in providing personalized recommendations based on customer data.
-Develop an AI model capable of automating routine tasks for increased productivity.",48.398693323135376,0.0,0,1.0,heuristic_graph_search,4,1,3,3,12,0,True,0.15,0.25,1.0,,,True,True,,,,,True
-1,phi3,search,Write an apology email to a customer for a delayed package.,"We sincerely apologize for any inconvenience caused by our shipping delay."", We understand how important timely deliveries are to our customers."", Sorry for this unforeseen delay and we appreciate your patience."", [",55.96206998825073,0.0,0,0.5,heuristic_graph_search,4,1,4,4,16,3,True,0.15,0.25,0.6666666666666666,0.5,True,False,True,False,,,,
-2,phi3,search,Explain what a database is to a 10 year old.,"Imagine it's similar to the library catalog that helps find books quickly and easily."", It organizes facts and figures so we can find what we need quickly just like books in sections on the shelves."",",39.0080840587616,0.0,0,0.75,heuristic_graph_search,4,1,2,2,8,0,True,0.15,0.25,1.0,0.75,True,,True,False,True,,,
-3,phi3,search,Create a short product description for a wireless mouse.,,28.782954692840576,0.0,0,0.0,heuristic_graph_search,4,1,0,1,4,4,True,0.15,0.25,0.0,,,False,,,,False,False,
-4,phi3,search,Write a short poem about debugging.,"Seek not with hands but heart and mind to quell.
-Through trials and tribulations we must proceed"",
-The truth within chaos to unbind."",
-Each step forward reveals more.",39.82834601402283,0.0,0,0.6666666666666666,heuristic_graph_search,4,1,4,4,16,0,True,0.15,0.25,1.0,0.6666666666666666,,,True,False,,,,True
-5,phi3,search,List ideas for a new tech startup.,"Our startup will focus on AI-driven cloud services to optimize online business operations."",
-We plan to integrate machine learning algorithms for predictive analysis and decision-making.
-The platform will cater specifically to small and medium enterprises by providing affordable AI-driven tools.",32.060683727264404,0.0,0,1.0,heuristic_graph_search,4,1,3,3,11,0,True,0.15,0.25,1.0,,,True,True,,,,,True
+instance_id,generator_model,generation_strategy,intent,generated_text,latency_initial_sec,latency_retry_sec,retries_used,global_score,M_algorithm,M_mcts_iterations,M_branching_factor,M_max_depth,M_exploration_weight,M_nodes_expanded,M_rollouts,M_best_reward,M_best_hard_score,M_semantic_guidance,M_semantic_weight,M_tone_repair,M_tone_repair_used,M_rollout_policy,M_rollout_temperature,M_root_children,M_final_global_score,C_max_words,C_mandatory_words,C_forbidden_words,C_tone,C_min_words,C_format_json,C_required_json_keys,C_exact_lines
+1,llama3,mcts,Write an apology email to a customer for a delayed package.,[ Here are two compact candidate actions: I understand the frustration It's unacceptable and I'm on it sorry shipping refund.,231.3508586883545,0.0,0,0.75,mcts,24,2,4,1.414,15,24,0.5721709907054902,1.0,True,0.7,True,0,llm,0.9,2,0.75,True,True,True,False,,,,
+2,llama3,mcts,Explain what a database is to a 10 year old.,"Here are two compact candidate actions that meet the constraints: Here are two possible next steps for explaining what a database is to a 10-year-old: ['Imagine you have a super cool library where you can store lots of books on different topics. A database is kind of like that library, but instead of books it stores information!'].",200.91865515708923,0.0,0,1.0,mcts,24,2,4,1.414,11,24,0.4459445953369141,1.0,True,0.7,True,0,llm,0.9,2,1.0,True,,True,True,True,,,
+3,llama3,mcts,Create a short product description for a wireless mouse.,"{""product_name"": ""ergonomic battery"", ""price"": ""ergonomic battery"", ""description"": ""ergonomic battery""}",19.009119749069214,0.0,0,1.0,mcts,24,2,1,1.414,1,24,1.0,1.0,True,0.7,True,0,llm,0.9,2,,,True,,,,True,True,
+4,llama3,mcts,Write a short poem about debugging.,"Midnight whispers creep into the void
+Sorrows echo through the silence's hush
+concise idea
+concise idea",177.69208216667175,0.0,0,1.0,mcts,24,2,4,1.414,15,24,0.6185433596372605,1.0,True,0.7,True,0,llm,0.9,2,1.0,,,True,True,,,,True
+5,llama3,mcts,List ideas for a new tech startup.,"Integrate AI-powered data analytics into cloud-based infrastructure for efficient data processing.
+concise idea
+concise idea",63.697415351867676,0.0,0,1.0,mcts,24,2,3,1.414,7,24,1.0,1.0,True,0.7,True,0,llm,0.9,2,,,True,True,,,,,True
+1,mistral,mcts,Write an apology email to a customer for a delayed package.,"""I'm truly sorry for the inconvenience you've experienced due to the delayed shipping of your package. We understand how important it is to receive your order on time and we appreciate your patience during this time."", refund.",60.38723134994507,0.0,0,1.0,mcts,24,2,4,1.414,2,24,0.5972301423549653,1.0,True,0.7,True,0,llm,0.9,2,1.0,True,True,True,True,,,,
+2,mistral,mcts,Explain what a database is to a 10 year old.,"Picture an enormous library filled with countless books containing tales, facts, and hidden knowledge. This vast collection is what we call a database!",54.59474039077759,0.0,0,0.75,mcts,24,2,4,1.414,1,24,0.0,0.0,True,0.7,True,1,llm,0.9,2,0.75,True,,True,True,False,,,
+3,mistral,mcts,Create a short product description for a wireless mouse.,"{ ""product_name"": ""Ergonomic Wireless Mouse"", ""price"": ""$29.99"", ""description"": ""Experience comfortable use with our ergonomic wireless mouse. This device offers long-lasting battery life for continuous productivity."", ""actions"": [""battery life: durable""]}",33.38370704650879,0.0,0,1.0,mcts,24,2,1,1.414,1,24,1.0,1.0,True,0.7,True,0,llm,0.9,2,,,True,,,,True,True,
+4,mistral,mcts,Write a short poem about debugging.,"A labyrinthine dance, where secrets are revealed.
+Seeking the truth, in lines deep and hidden
+In the shadows, solutions emerge from the twilight
+In silence, the dark whispers a riddle,",173.07523488998413,0.0,0,1.0,mcts,24,2,4,1.414,15,24,0.6271791338920594,1.0,True,0.7,True,0,llm,0.9,2,1.0,,,True,True,,,,True
+5,mistral,mcts,List ideas for a new tech startup.,"AI-powered cloud collaboration tool
+concise idea
+concise idea",51.28898239135742,0.0,0,1.0,mcts,24,2,3,1.414,7,24,1.0,1.0,True,0.7,True,0,llm,0.9,2,,,True,True,,,,,True
+1,phi3,mcts,Write an apology email to a customer for a delayed package.,"[ ```json [ ""Sorry for the delay in shipping your package; we understand how important timely delivery is."", ""We apologize and will offer a refund to show our regret."" ].",157.72579789161682,0.0,0,0.75,mcts,24,2,4,1.414,15,24,0.5239756494760514,1.0,True,0.7,True,0,llm,0.9,2,0.75,True,True,True,False,,,,
+2,phi3,mcts,Explain what a database is to a 10 year old.,"[ [ [""A database is like a big toy box where you keep all your favorite things so that they can be easily found and played with later on.""], [""It's also kind of like the memory in our brains because we remember important events using pictures or words, just like how databases store information for us when needed.""].",197.33584666252136,0.0,0,0.75,mcts,24,2,4,1.414,12,24,0.5820281088352204,1.0,True,0.7,True,0,llm,0.9,2,0.75,True,,True,False,True,,,
+3,phi3,mcts,Create a short product description for a wireless mouse.,"{""product_name"": ""ergonomic battery"", ""price"": ""ergonomic battery"", ""description"": ""ergonomic battery""}",24.452542066574097,0.0,0,1.0,mcts,24,2,1,1.414,1,24,1.0,1.0,True,0.7,True,0,llm,0.9,2,,,True,,,,True,True,
+4,phi3,mcts,Write a short poem about debugging.,"[
+[""In silent shadows of logic’s labyrin',
+[
+concise idea",158.92135453224182,0.0,0,0.6666666666666666,mcts,24,2,4,1.414,15,24,0.5281487882137299,1.0,True,0.7,True,0,llm,0.9,2,0.6666666666666666,,,True,False,,,,True
+5,phi3,mcts,List ideas for a new tech startup.,"```json
+AI cloud
+concise idea",39.29613971710205,0.0,0,1.0,mcts,24,2,3,1.414,6,24,1.0,1.0,True,0.7,True,0,llm,0.9,2,,,True,True,,,,,True

@@ -9,7 +9,7 @@ sys.path.append(os.path.dirname(__file__))
 from generator import DynamicGenerator
 from evaluator import DynamicEvaluator
 
-GENERATION_STRATEGY = "search"
+GENERATION_STRATEGY = "mcts"  # Options: 'mcts', 'search', 'direct'
 
 def run_experiment():
     base_dir = os.path.dirname(os.path.dirname(__file__))
@@ -38,7 +38,15 @@ def run_experiment():
             constraints = item['constraints']
             
             # Step A: Generation
-            if GENERATION_STRATEGY == 'search':
+            print(GENERATION_STRATEGY)
+            if GENERATION_STRATEGY == 'mcts':
+                generated_text, metrics = generator.generate_with_mcts(
+                    intent,
+                    constraints,
+                    model,
+                    judge_model=judge_model
+                )
+            elif GENERATION_STRATEGY == 'search':
                 generated_text, metrics = generator.generate_with_search(
                     intent,
                     constraints,
