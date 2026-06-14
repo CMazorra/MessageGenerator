@@ -5,3 +5,7 @@ jupyterlab
 tqdm
 pytest
 sentence-transformers
+simpy 
+pandas 
+matplotlib
+sklearn

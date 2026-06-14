@@ -13,7 +13,7 @@ GENERATION_STRATEGY = "mcts"  # Options: 'mcts', 'search', 'direct'
 
 def run_experiment():
     base_dir = os.path.dirname(os.path.dirname(__file__))
-    data_path = os.path.join(base_dir, 'data', 'dataset_constraints.json')
+    data_path = os.path.join(base_dir, 'data', 'synthetic_dataset.json')
     results_path = os.path.join(base_dir, 'data', 'dynamic_experiment_results.csv')
 
     with open(data_path, 'r', encoding='utf-8') as f:

@@ -1,0 +1,375 @@
+[
+  {
+    "id": 1,
+    "intent": "Write a short rejection email to a candidate.",
+    "constraints": {
+      "max_words": 50,
+      "forbidden_words": [
+        "unfortunately",
+        "sorry"
+      ],
+      "tone": "formal"
+    }
+  },
+  {
+    "id": 2,
+    "intent": "Explain the concept of arrays in JavaScript.",
+    "constraints": {
+      "min_words": 100,
+      "mandatory_words": [
+        "JavaScript",
+        "arrays"
+      ],
+      "format": "markdown"
+    }
+  },
+  {
+    "id": 3,
+    "intent": "Write a short story about a cat's day.",
+    "constraints": {
+      "max_words": 200,
+      "forbidden_words": [
+        "the",
+        "and",
+        "but"
+      ],
+      "tone": "creative"
+    }
+  },
+  {
+    "id": 4,
+    "intent": "Generate JSON data for a fictional company.",
+    "constraints": {
+      "format": "json",
+      "required_json_keys": [
+        "name",
+        "location",
+        "employees"
+      ],
+      "exact_lines": 3
+    }
+  },
+  {
+    "id": 5,
+    "intent": "Write an email to a colleague about a meeting.",
+    "constraints": {
+      "max_words": 75,
+      "mandatory_words": [
+        "meeting",
+        "tomorrow"
+      ],
+      "tone": "professional"
+    }
+  },
+  {
+    "id": 6,
+    "intent": "Explain the concept of object-oriented programming in Python.",
+    "constraints": {
+      "min_words": 150,
+      "forbidden_words": [
+        "class",
+        "inheritance"
+      ],
+      "format": "markdown"
+    }
+  },
+  {
+    "id": 7,
+    "intent": "Write a poem about nature.",
+    "constraints": {
+      "max_words": 100,
+      "forbidden_words": [
+        "beautiful",
+        "beauty"
+      ],
+      "tone": "inspirational"
+    }
+  },
+  {
+    "id": 8,
+    "intent": "Generate JSON data for a fictional product.",
+    "constraints": {
+      "format": "json",
+      "required_json_keys": [
+        "name",
+        "price",
+        "description"
+      ],
+      "exact_lines": 2
+    }
+  },
+  {
+    "id": 9,
+    "intent": "Write an email to a customer about a refund.",
+    "constraints": {
+      "max_words": 60,
+      "mandatory_words": [
+        "refund",
+        "thank you"
+      ],
+      "tone": "helpful"
+    }
+  },
+  {
+    "id": 10,
+    "intent": "Explain the concept of machine learning in AI.",
+    "constraints": {
+      "min_words": 120,
+      "forbidden_words": [
+        "AI",
+        "machine learning"
+      ],
+      "format": "markdown"
+    }
+  },
+  {
+    "id": 11,
+    "intent": "Write a short script for a fictional character.",
+    "constraints": {
+      "max_words": 180,
+      "forbidden_words": [
+        "said",
+        "asked",
+        "told"
+      ],
+      "tone": "dramatic"
+    }
+  },
+  {
+    "id": 12,
+    "intent": "Generate JSON data for a fictional user.",
+    "constraints": {
+      "format": "json",
+      "required_json_keys": [
+        "name",
+        "email",
+        "password"
+      ],
+      "exact_lines": 2
+    }
+  },
+  {
+    "id": 13,
+    "intent": "Write an email to a friend about plans.",
+    "constraints": {
+      "max_words": 80,
+      "mandatory_words": [
+        "plans",
+        "Friday"
+      ],
+      "tone": "casual"
+    }
+  },
+  {
+    "id": 14,
+    "intent": "Explain the concept of data structures in computer science.",
+    "constraints": {
+      "min_words": 150,
+      "forbidden_words": [
+        "data structures",
+        "computer science"
+      ],
+      "format": "markdown"
+    }
+  },
+  {
+    "id": 15,
+    "intent": "Write a short story about space exploration.",
+    "constraints": {
+      "max_words": 220,
+      "forbidden_words": [
+        "the",
+        "and",
+        "but"
+      ],
+      "tone": "educational"
+    }
+  },
+  {
+    "id": 16,
+    "intent": "Generate JSON data for a fictional company's employees.",
+    "constraints": {
+      "format": "json",
+      "required_json_keys": [
+        "name",
+        "title",
+        "department"
+      ],
+      "exact_lines": 5
+    }
+  },
+  {
+    "id": 17,
+    "intent": "Write an email to a colleague about a project update.",
+    "constraints": {
+      "max_words": 90,
+      "mandatory_words": [
+        "project",
+        "update"
+      ],
+      "tone": "professional"
+    }
+  },
+  {
+    "id": 18,
+    "intent": "Explain the concept of algorithms in programming.",
+    "constraints": {
+      "min_words": 100,
+      "forbidden_words": [
+        "algorithm",
+        "programming"
+      ],
+      "format": "markdown"
+    }
+  },
+  {
+    "id": 19,
+    "intent": "Write a short script for a fictional conversation.",
+    "constraints": {
+      "max_words": 160,
+      "forbidden_words": [
+        "said",
+        "asked",
+        "told"
+      ],
+      "tone": "natural"
+    }
+  },
+  {
+    "id": 20,
+    "intent": "Generate JSON data for a fictional product's reviews.",
+    "constraints": {
+      "format": "json",
+      "required_json_keys": [
+        "name",
+        "rating",
+        "review"
+      ],
+      "exact_lines": 4
+    }
+  },
+  {
+    "id": 21,
+    "intent": "Write an email to a customer about a product issue.",
+    "constraints": {
+      "max_words": 65,
+      "mandatory_words": [
+        "product",
+        "issue"
+      ],
+      "tone": "helpful"
+    }
+  },
+  {
+    "id": 22,
+    "intent": "Explain the concept of neural networks in AI.",
+    "constraints": {
+      "min_words": 140,
+      "forbidden_words": [
+        "AI",
+        "neural networks"
+      ],
+      "format": "markdown"
+    }
+  },
+  {
+    "id": 23,
+    "intent": "Write a short story about a historical event.",
+    "constraints": {
+      "max_words": 200,
+      "forbidden_words": [
+        "the",
+        "and",
+        "but"
+      ],
+      "tone": "educational"
+    }
+  },
+  {
+    "id": 24,
+    "intent": "Generate JSON data for a fictional company's products.",
+    "constraints": {
+      "format": "json",
+      "required_json_keys": [
+        "name",
+        "price",
+        "description"
+      ],
+      "exact_lines": 3
+    }
+  },
+  {
+    "id": 25,
+    "intent": "Write an email to a colleague about a meeting invitation.",
+    "constraints": {
+      "max_words": 70,
+      "mandatory_words": [
+        "meeting",
+        "invitation"
+      ],
+      "tone": "professional"
+    }
+  },
+  {
+    "id": 26,
+    "intent": "Explain the concept of computer vision in AI.",
+    "constraints": {
+      "min_words": 110,
+      "forbidden_words": [
+        "AI",
+        "computer vision"
+      ],
+      "format": "markdown"
+    }
+  },
+  {
+    "id": 27,
+    "intent": "Write a short script for a fictional character's monologue.",
+    "constraints": {
+      "max_words": 180,
+      "forbidden_words": [
+        "said",
+        "asked",
+        "told"
+      ],
+      "tone": "inspirational"
+    }
+  },
+  {
+    "id": 28,
+    "intent": "Generate JSON data for a fictional user's preferences.",
+    "constraints": {
+      "format": "json",
+      "required_json_keys": [
+        "name",
+        "age",
+        "interests"
+      ],
+      "exact_lines": 2
+    }
+  },
+  {
+    "id": 29,
+    "intent": "Write an email to a friend about a trip plan.",
+    "constraints": {
+      "max_words": 85,
+      "mandatory_words": [
+        "trip",
+        "plan"
+      ],
+      "tone": "casual"
+    }
+  },
+  {
+    "id": 30,
+    "intent": "Explain the concept of natural language processing in AI.",
+    "constraints": {
+      "min_words": 130,
+      "forbidden_words": [
+        "AI",
+        "natural language processing"
+      ],
+      "format": "markdown"
+    }
+  }
+]

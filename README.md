@@ -6,6 +6,9 @@ Este repositorio contiene todo el entorno de desarrollo, evaluación y reportes 
 El sistema plantea un **Dynamic Constraint Satisfaction Problem (CSP)** en el cual diversos LLMs locales (Llama 3, Mistral, Phi-3) generan textos mientras intentan satisfacer restricciones estructurales duras (conteo de palabras, líneas exactas, llaves de JSON) y restricciones semánticas o "suaves" (tono). El sistema incluye:
 - **LLM-as-a-Judge**: Un modelo secundario evalúa autónomamente si el tono se cumple.
 - **Reflection Loop (Auto-corrección)**: Un módulo que detecta los errores y re-prompta al modelo en un bucle cerrado.
+- **Búsqueda Determinista (Beam Search):** Mantiene múltiples rutas de generación en paralelo, optimizadas para no desviarse de las restricciones de formato crítico.
+- **Búsqueda en Árbol de Monte Carlo (MCTS):** Utiliza UCT (Upper Confidence Bound for Trees) para equilibrar la exploración semántica con la explotación de rutas estructuralmente seguras.
+- **Optimización de Heurísticas por ML:** Incorpora un modelo de Regresión Logística entrenado con datos de simulaciones previas para descubrir automáticamente el peso matemático ideal de cada restricción.
 
 ## Requisitos Previos
 - **Docker** y **Docker Compose** instalados o **Ollama** independiente.
@@ -38,11 +41,12 @@ python src/main.py
 Para asegurar la fiabilidad de las validaciones en python (las restricciones duras), utilizamos pytest:
 ```bash
 python -m pytest tests/test_evaluator.py
+python -m pytest tests/test_generator_search.py
 ```
 
 ## Estructura del Proyecto
 
 - `data/` \- Dataset en JSON y tabla de resultados CSV.
-- `src/` \- Código principal (`generator.py`, `evaluator.py`, `main.py`).
+- `src/` \- Código principal.
 - `docs/` \- Documentación, informe técnico y análisis de resultados de cada variante.
 - `tests/` \- Pruebas unitarias automatizadas. 

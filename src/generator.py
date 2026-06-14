@@ -491,16 +491,30 @@ class DynamicGenerator:
             hard_score = 1.0
             details = {}
 
-        reward = hard_score
-        
-        # --- RECOMPENSA SEMÁNTICA USANDO LA CACHÉ VECTORIAL ---
-        if semantic_guidance and 'tone' in constraints:
-            semantic_score = self._score_semantic_guidance(rollout_text, constraints)
-            hard_weight = max(0.0, 1.0 - semantic_weight)
-            reward = (hard_weight * hard_score) + (semantic_weight * semantic_score)
-            details["semantic_guidance"] = round(semantic_score, 4)
+        w_json = 0.4913
+        w_length = 0.2140
+        w_lexical = 0.0987
+        w_semantic = 0.1961
 
-        reward += self._score_length_lookahead(rollout_text, constraints, max_depth, max_depth)
+        json_keys = [k for k in ['format_json', 'required_json_keys', 'exact_lines'] if k in details]
+        score_json = sum(details[k] for k in json_keys) / len(json_keys) if json_keys else 1.0
+
+        length_keys = [k for k in ['min_words', 'max_words'] if k in details]
+        score_length_base = sum(details[k] for k in length_keys) / len(length_keys) if length_keys else 1.0
+        lookahead = self._score_length_lookahead(rollout_text, constraints, max_depth, max_depth)
+        score_length = max(0.0, min(1.0, score_length_base + lookahead))
+
+        lexical_keys = [k for k in ['mandatory_words', 'forbidden_words'] if k in details]
+        score_lexical = sum(details[k] for k in lexical_keys) / len(lexical_keys) if lexical_keys else 1.0
+
+        score_semantic = 1.0
+        if semantic_guidance and 'tone' in constraints:
+            score_semantic = self._score_semantic_guidance(rollout_text, constraints)
+            details["semantic_guidance"] = round(score_semantic, 4)
+
+        reward = (w_json * score_json) + (w_length * score_length) + \
+                 (w_lexical * score_lexical) + (w_semantic * score_semantic)
+        
         reward = max(0.0, min(reward, 1.0))
         return reward, hard_score, details, rollout_text
 
@@ -578,48 +592,33 @@ class DynamicGenerator:
             hard_score = 1.0
             details = {}
 
-        words = re.findall(r'\b\w+\b', text)
-        search_score = hard_score
+        w_json = 0.4913
+        w_length = 0.2140
+        w_lexical = 0.0987
+        w_semantic = 0.1961
 
-        if 'mandatory_words' in constraints and constraints['mandatory_words']:
-            found = sum(
-                1 for word in constraints['mandatory_words']
-                if re.search(rf'\b{re.escape(word)}\b', text, re.IGNORECASE)
-            )
-            search_score += 0.10 * (found / len(constraints['mandatory_words']))
+        json_keys = [k for k in ['format_json', 'required_json_keys', 'exact_lines'] if k in details]
+        score_json = sum(details[k] for k in json_keys) / len(json_keys) if json_keys else 1.0
 
-        if 'min_words' in constraints and constraints['min_words'] > 0:
-            search_score += 0.05 * min(len(words) / constraints['min_words'], 1.0)
+        length_keys = [k for k in ['min_words', 'max_words'] if k in details]
+        score_length_base = sum(details[k] for k in length_keys) / len(length_keys) if length_keys else 1.0
+        lookahead = self._score_length_lookahead(text, constraints, depth, max_depth)
+        details["length_lookahead"] = round(lookahead, 4)
+        score_length = max(0.0, min(1.0, score_length_base + lookahead))
 
-        if 'exact_lines' in constraints and constraints['exact_lines'] > 0:
-            line_count = len([line for line in text.strip().split('\n') if line.strip()])
-            search_score += 0.05 * min(line_count / constraints['exact_lines'], 1.0)
-            if line_count > constraints['exact_lines']:
-                search_score -= 0.25
+        lexical_keys = [k for k in ['mandatory_words', 'forbidden_words'] if k in details]
+        score_lexical = sum(details[k] for k in lexical_keys) / len(lexical_keys) if lexical_keys else 1.0
 
-        if 'max_words' in constraints and len(words) > constraints['max_words']:
-            search_score -= 0.25
-
-        if 'forbidden_words' in constraints:
-            has_forbidden = any(
-                re.search(rf'\b{re.escape(word)}\b', text, re.IGNORECASE)
-                for word in constraints['forbidden_words']
-            )
-            if has_forbidden:
-                search_score -= 0.50
-
-        lookahead_adjustment = self._score_length_lookahead(text, constraints, depth, max_depth)
-        search_score += lookahead_adjustment
-        details["length_lookahead"] = round(lookahead_adjustment, 4)
-
+        score_semantic = 1.0
         if semantic_guidance and 'tone' in constraints:
             projected_text = self._quick_rollout_complete(text, intent, constraints, max_depth)
-            
-            semantic_score = self._score_semantic_guidance(projected_text, constraints)
-            
-            search_score += semantic_weight * semantic_score
-            details["semantic_guidance"] = round(semantic_score, 4)
+            score_semantic = self._score_semantic_guidance(projected_text, constraints)
+            details["semantic_guidance"] = round(score_semantic, 4)
 
+        search_score = (w_json * score_json) + (w_length * score_length) + \
+                       (w_lexical * score_lexical) + (w_semantic * score_semantic)
+        
+        search_score = max(0.0, min(search_score, 1.0))
         return search_score, hard_score, details
 
     def generate_with_search(
