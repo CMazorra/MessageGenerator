@@ -1,0 +1,11 @@
+{
+  "w_json": 0.42549271794934657,
+  "w_length": 0.0,
+  "w_lexical": 0.26105906634149695,
+  "w_semantic": 0.31344821570915654,
+  "source_csv": "D:\\GitHub\\MessageGenerator\\data\\dynamic_experiment_results.csv",
+  "strategy_filter": null,
+  "rows_used": 90,
+  "success_rows": 33,
+  "failure_rows": 57
+}

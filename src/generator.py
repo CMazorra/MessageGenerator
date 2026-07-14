@@ -6,6 +6,37 @@ import re
 import time
 import ollama
 
+
+DEFAULT_HEURISTIC_WEIGHTS = {
+    "json": 0.4913,
+    "length": 0.2140,
+    "lexical": 0.0987,
+    "semantic": 0.1961,
+}
+
+
+def _load_heuristic_weights():
+    weights_path = os.path.join(
+        os.path.dirname(os.path.dirname(__file__)),
+        "data",
+        "heuristic_weights.json",
+    )
+    try:
+        with open(weights_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return {
+            "json": float(data["w_json"]),
+            "length": float(data["w_length"]),
+            "lexical": float(data["w_lexical"]),
+            "semantic": float(data["w_semantic"]),
+        }
+    except (FileNotFoundError, KeyError, TypeError, ValueError, json.JSONDecodeError):
+        return DEFAULT_HEURISTIC_WEIGHTS
+
+
+HEURISTIC_WEIGHTS = _load_heuristic_weights()
+
+
 class DynamicGenerator:
     TONE_PROTOTYPES = {
         "empathetic": (
@@ -491,10 +522,10 @@ class DynamicGenerator:
             hard_score = 1.0
             details = {}
 
-        w_json = 0.4913
-        w_length = 0.2140
-        w_lexical = 0.0987
-        w_semantic = 0.1961
+        w_json = HEURISTIC_WEIGHTS["json"]
+        w_length = HEURISTIC_WEIGHTS["length"]
+        w_lexical = HEURISTIC_WEIGHTS["lexical"]
+        w_semantic = HEURISTIC_WEIGHTS["semantic"]
 
         json_keys = [k for k in ['format_json', 'required_json_keys', 'exact_lines'] if k in details]
         score_json = sum(details[k] for k in json_keys) / len(json_keys) if json_keys else 1.0
@@ -592,10 +623,10 @@ class DynamicGenerator:
             hard_score = 1.0
             details = {}
 
-        w_json = 0.4913
-        w_length = 0.2140
-        w_lexical = 0.0987
-        w_semantic = 0.1961
+        w_json = HEURISTIC_WEIGHTS["json"]
+        w_length = HEURISTIC_WEIGHTS["length"]
+        w_lexical = HEURISTIC_WEIGHTS["lexical"]
+        w_semantic = HEURISTIC_WEIGHTS["semantic"]
 
         json_keys = [k for k in ['format_json', 'required_json_keys', 'exact_lines'] if k in details]
         score_json = sum(details[k] for k in json_keys) / len(json_keys) if json_keys else 1.0

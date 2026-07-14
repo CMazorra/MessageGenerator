@@ -1,5 +1,11 @@
 # Heuristic Optimization via Machine Learning: Post-Weight Evaluation Report
 
+> Reproducibility note: `learn_heuristics.py` now trains from `data/dynamic_experiment_results.csv`
+> and writes the active policy to `data/heuristic_weights.json`. The current telemetry-derived
+> weights are `w_json=0.4255`, `w_length=0.0000`, `w_lexical=0.2611`, and `w_semantic=0.3134`
+> using 90 rows (33 successes, 57 failures). Re-run the comparative experiment after regenerating
+> weights before citing post-optimization performance deltas.
+
 ## 1. Motivation and Mathematical Framework (`learn_heuristics.py`)
 
 In neuro-symbolic framework design, configuring search heuristics manually often introduces human bias and fails to capture the true mathematical contribution of individual sub-metrics toward a globally successful state. To resolve this, `learn_heuristics.py` implements a data-driven alignment strategy that frames weight discovery as a supervised learning problem.
